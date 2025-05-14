@@ -18,7 +18,7 @@ var Requests = {
     "verProdutos": function () {
         var restaurante = localStorage.getItem("restaurante");
         $.get(api + "/verProdutos.php", { restaurante: restaurante }).done(function (data) {
-            //console.log(data);
+            console.log(data);
             var res = JSON.parse(data);
             if (res.ok) {
                 tabelaProdutos.setItem("produtos", res.payload);
@@ -138,7 +138,7 @@ var Requests = {
                 var contanova = data;
 
                 if (contaatual != contanova) {
-                    notificacao.sms("Conta atualizada");
+                    notificacao.sms("Atenção às notificações", 1);
                     $(".conta").html("");
                     esse.verConta();
                     tabelaPedidos.setItem("contaatual", JSON.parse(contanova));
@@ -356,12 +356,16 @@ var Requests = {
             var res = JSON.parse(data);
             var imgSlide = [];
             if (res.ok) {
-                (JSON.parse(res.slide)).forEach((element) => {
-                   imgSlide.push('<img src="'+(api)+'/img/'+(element)+'">');
-                });
-                localStorage.setItem("slide",JSON.stringify(imgSlide));
-                localStorage.setItem("pub",res.pub);
-                localStorage.setItem("logo",res.logo);
+                try {
+                    (JSON.parse(res.slide)).forEach((element) => {
+                    imgSlide.push('<img src="'+(api)+'/img/'+(element)+'">');
+                    });
+                    localStorage.setItem("slide",JSON.stringify(imgSlide));
+                    localStorage.setItem("pub",res.pub);
+                    localStorage.setItem("logo",res.logo);
+                } catch (error) {
+                    //console.error(error);
+                }
             } else {
                
             }

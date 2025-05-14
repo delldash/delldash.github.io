@@ -93,9 +93,15 @@
     <script src="router.js"></script>
     <script src="sw.js"></script>
     <script>
-    Requests.verProdutos();
-    Requests.pullingConta();
-    Requests.pullingPedidos();
+    
+    if((new URLSearchParams(window.location.search).toString().split("=")[0]) || (localStorage.getItem("restaurante") != null)){
+        Requests.verProdutos();
+    }
+    if(hash.split("#")[1] || (localStorage.getItem("mesa"))){
+        Requests.pullingConta();
+        Requests.pullingPedidos();
+    }
+    
 
 
      $(document).ready(function(){

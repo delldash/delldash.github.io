@@ -1,3 +1,4 @@
+const hash = window.location.hash;
 const uiEntrar = `
     <br><br><br>
     <h3>POR FAVOR<br>INSIRA UM NOME</h3><br>
@@ -57,7 +58,12 @@ const routes = {
     "/mesaIndisponivel": "/pages/mesaIndisponivel.html",
     "/mesas": "/pages/mesas.html",
     "/menu": "/pages/menu.html",
-    "/produtos": "/pages/produtos.html"
+    "/produtos": "/pages/produtos.html",
+
+
+    "/inicio": "/pages/inicio.html",
+    "/donorestaurante": "/pages/donorestaurante.html",
+    "/cliente": "/pages/cliente.html"
 }
 
 const handleLocation = async () => {
@@ -79,6 +85,8 @@ const handleLocation = async () => {
                     
                     vaiTela("home");
                     return;
+                }else{
+                    //localStorage.clear();
                 }
                 var query = (new URLSearchParams(window.location.search).toString().split("="));
                 console.info(hash.split("#")[1]);
@@ -105,14 +113,28 @@ const handleLocation = async () => {
                     Requests.slidePub();
                     loader.abrir();
                     var slide = JSON.parse(localStorage.getItem("slide"));
-                    document.querySelector(".corpo").prepend((new debliwuislideimg($, slide)));
+                   document.querySelector(".corpo").prepend((new debliwuislideimg($, slide)));
                     setTimeout(function () {
                         Requests.verMenu((new URLSearchParams(window.location.search).toString().split("=")[0]));
                         loader.fechar();
                     }, 1000);
                     return;
                 }else{
-                    document.querySelector(".corpo").innerHTML = uiSimples;
+                    document.querySelector(".corpo").innerHTML = ui /* uiSimples */;
+
+                    document.querySelector(".slide-inicio").prepend((new debliwuislideimg($, [
+                        `<h2 style="text-align:justify;">Do pedido ao pagamento, tudo sob controle.</h2>`,
+                        `<h2 style="text-align:justify;">Menos espera, mais satisfação.</h2>`,
+                        `<h2 style="text-align:justify;">O seu pedido, na palma da mão.</h2>`,
+                        `<h2 style="text-align:justify;">O seu restaurante merece tecnologia que simplifica e encanta!</h2>`
+                        ],1, false, 1500, 3200)));
+                    document.querySelector(".slide-inicio").append((new debliwuislideimg($, [
+                        `<img src="images/1.png" style="width:100%;">`,
+                        `<img src="images/2.png" style="width:100%;">`,
+                        `<img src="images/3.png" style="width:100%;">`,
+                        `<img src="images/4.png" style="width:100%;">`,
+                        `<img src="images/5.png" style="width:100%;">`
+                        ],1, true, 1000, 3000)));
                 }
             }
             if (path == "/reclamacao") {
@@ -218,6 +240,74 @@ const handleLocation = async () => {
 
             }
 
+
+
+
+
+            if (path == "/inicio") {
+                loader.abrir();
+                document.querySelector(".slide-inicio").prepend((new debliwuislideimg($, [
+                    `<h2 style="text-align:justify;">Do pedido ao pagamento, tudo sob controle.</h2>`,
+                    `<h2 style="text-align:justify;">Menos espera, mais satisfação.</h2>`,
+                    `<h2 style="text-align:justify;">O seu pedido, na palma da mão.</h2>`,
+                    `<h2 style="text-align:justify;">O seu restaurante merece tecnologia que simplifica e encanta!</h2>`
+                    ],1, false, 1500, 3200)));
+                document.querySelector(".slide-inicio").append((new debliwuislideimg($, [
+                    `<img src="images/1.png" style="width:100%;">`,
+                    `<img src="images/2.png" style="width:100%;">`,
+                    `<img src="images/3.png" style="width:100%;">`,
+                    `<img src="images/4.png" style="width:100%;">`,
+                    `<img src="images/5.png" style="width:100%;">`
+                    ],1, true, 1000, 3000)));
+                setTimeout(function () {
+                    //Requests.verMesas(((window.location.hash).split("#")[1]));
+                    loader.fechar();
+                }, 1000);
+
+            }
+
+            
+
+        /*     if (path == "/cliente") {
+                loader.abrir();
+                document.querySelector(".slide-cima").append((new debliwuislideimg($, [
+                    `<h2 style="text-align:justify;">Do pedido ao pagamento, tudo sob controle.</h2>`,
+                    `<h2 style="text-align:justify;">Menos espera, mais satisfação.</h2>`,
+                    `<h2 style="text-align:justify;">O seu pedido, na palma da mão.</h2>`,
+                    `<h2 style="text-align:justify;">O seu restaurante merece tecnologia que simplifica e encanta!</h2>`
+                    ],1, true, 1000, 3000)));
+                document.querySelector(".slide-inicio").append((new debliwuislideimg($, [
+                    `<h2 style="text-align:justify;">Do pedido ao pagamento, tudo sob controle.</h2>`,
+                    `<h2 style="text-align:justify;">Menos espera, mais satisfação.</h2>`,
+                    `<h2 style="text-align:justify;">O seu pedido, na palma da mão.</h2>`,
+                    `<h2 style="text-align:justify;">O seu restaurante merece tecnologia que simplifica e encanta!</h2>`
+                    ],1, true, 1000, 3000)));
+                setTimeout(function () {
+                    //Requests.verMesas(((window.location.hash).split("#")[1]));
+                    loader.fechar();
+                }, 1000);
+
+            }
+
+            
+
+            if (path == "/donorestaurante") {
+                loader.abrir();
+                
+                document.querySelector(".slide-inicio").append((new debliwuislideimg($, [
+                    `<h2 style="font-weight:400;text-align:center;">Do pedido ao pagamento, tudo sob controle.</h2>`,
+                    `<h2 style="font-weight:400;text-align:center;">Menos espera, mais satisfação.</h2>`,
+                    `<h2 style="font-weight:400;text-align:center;">O seu pedido, na palma da mão.</h2>`,
+                    `<h2 style="font-weight:400;text-align:center;">O seu restaurante merece tecnologia que simplifica e encanta!</h2>`
+                    ],1, true, 1000, 3000)));
+                setTimeout(function () {
+                    //Requests.verMesas(((window.location.hash).split("#")[1]));
+                    loader.fechar();
+                }, 1000);
+
+            } */
+
+
         });
 
     })
@@ -227,6 +317,10 @@ const handleLocation = async () => {
 
 window.onpopstate = handleLocation;
 window.route = route;
+
+if(!localStorage.getItem("mesa")){
+    localStorage.clear();
+}
 
 handleLocation();
 //anima();

@@ -254,7 +254,7 @@ handleLocation = async () => {
 
         Requests.slidePub();
         var pub = (localStorage.getItem("pub"));
-        esse.shadowRoot.querySelector('.pub').setAttribute("src",api+"/img/"+pub);
+        esse.shadowRoot.querySelector('.pub').setAttribute("src",api+"img/"+pub);
 
         var route = this.getAttribute('route');
         this.shadowRoot.querySelector('.aciona-menu').addEventListener("click", function () {
